@@ -11,8 +11,8 @@ The UI of this project is mostly generated using [v0](https://v0.dev/), as I did
 ## Layout
 
 <p align="center">
-    <img src="./example/1.png" alt="Example Hompage" width="400px">
-    <img src="./example/2.png" alt="Example Result" width="400px">
+    <img src="./example/1.png" alt="Example Homepage" width="800px"><br><br>
+    <img src="./example/2.png" alt="Example Result" width="800px">
 </p>
 
 ## Technologies
