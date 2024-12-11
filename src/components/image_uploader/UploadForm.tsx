@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
+import { useExtractor } from "@/context/ExtractorContext";
+import { ServerResponse } from "./ServerResponse";
+import { useState } from "react";
 
 interface UploadFormProps {
   onFileChange: (file: File | null) => void;
@@ -16,13 +19,33 @@ export function UploadForm({
   onUpload,
   isLoading,
 }: UploadFormProps) {
+  const { setServerMessages } = useExtractor();
+  const [isUploaded, setIsUploaded] = useState(false);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
     onFileChange(file);
+    setIsUploaded(false);
   };
 
   const handleDiscard = () => {
+    setServerMessages([]);
+
     onFileChange(null);
+
+    const fileInput = document.getElementById(
+      "image-upload"
+    ) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = "";
+    }
+
+    setIsUploaded(false);
+  };
+
+  const handleUpload = () => {
+    onUpload();
+    setIsUploaded(true);
   };
 
   return (
@@ -34,7 +57,7 @@ export function UploadForm({
           type="file"
           onChange={handleFileChange}
           accept="image/*"
-          className="mt-1"
+          className="mt-1 "
         />
       </div>
       {imagePreview && (
@@ -51,14 +74,17 @@ export function UploadForm({
             size="icon"
             onClick={handleDiscard}
             aria-label="Discard image"
+            disabled={isLoading}
           >
-            <X className="h-4 w-4" />
+            <X className="h-4 w-4 " />
           </Button>
         </div>
       )}
-      <Button onClick={onUpload} disabled={isLoading} className="w-full">
+      <Button onClick={handleUpload} disabled={isLoading} className="w-full">
         {isLoading ? "Đang tải..." : "Tải lên"}
       </Button>
+
+      {isUploaded && <ServerResponse />}
     </div>
   );
 }
