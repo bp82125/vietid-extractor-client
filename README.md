@@ -1,6 +1,6 @@
 # Vietnamese ID Card Information Extractor (Client)
 
-A project focused on extracting information from the front side of Vietnamese ID cards, such as ID number, name, and address. This client-side application is built with React, allows users to upload card images, view each step of the processing, and manage the results.
+This project focuses on extracting essential information from the front of Vietnamese ID cards, such as the ID number, name, and address. The client-side application, built with React, allows users to upload ID card images, view the processing steps in real-time, and manage the extracted results.
 
 Check out [Vietnamese ID Card Information Extractor (Server)](https://github.com/bp82125/vietid-extractor-server)
 
